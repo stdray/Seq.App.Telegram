@@ -1,0 +1,5 @@
+msbuild Seq.App.Telegram.csproj /t:Clean;Rebuild /p:Configuration=Release /p:Platform=AnyCPU /v:q
+
+nuget pack Seq.App.Telegram.csproj -properties Configuration=Release
+
+nuget push Seq.App.Telegram.0.0.1.0.nupkg

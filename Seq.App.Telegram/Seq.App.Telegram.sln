@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seq.App.Telegram", "Seq.App.Telegram\Seq.App.Telegram.csproj", "{E373E859-0769-4D4A-B152-C0DEB1BAB824}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E373E859-0769-4D4A-B152-C0DEB1BAB824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E373E859-0769-4D4A-B152-C0DEB1BAB824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E373E859-0769-4D4A-B152-C0DEB1BAB824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E373E859-0769-4D4A-B152-C0DEB1BAB824}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F45F93B0-D54B-496B-9CD3-B1481D560E6F}
+	EndGlobalSection
+EndGlobal
