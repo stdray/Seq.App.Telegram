@@ -11,38 +11,36 @@ namespace Seq.App.Telegram
     public class MessageFormatter
     {
         static readonly Regex PlaceholdersRegex = new Regex("(\\[(?<key>[^\\[\\]]+?)(\\:(?<format>[^\\[\\]]+?))?\\])", RegexOptions.CultureInvariant | RegexOptions.Compiled);
-        
-        public MessageFormatter(ILogger log, string baseUrl, string messageTamplate)
+
+        public MessageFormatter(ILogger log, string baseUrl, string messageTemplate)
         {
             Log = log;
-            MessageTamplate = messageTamplate ?? "[RenderedMessage]";
+            MessageTemplate = messageTemplate ?? "[RenderedMessage]";
             BaseUrl = baseUrl;
         }
 
         public ILogger Log { get; }
-        public string MessageTamplate { get; }
+        public string MessageTemplate { get; }
         public string BaseUrl { get; }
 
         public string GenerateMessageText(Event<LogEventData> evt)
         {
-            return $"{SubstitutePlaceholders(MessageTamplate, evt)} (<{BaseUrl}/#/events?filter=@Id%20%3D%3D%20%22{evt.Id}%22&show=expanded|View on Seq>)";
+            return $"{SubstitutePlaceholders(MessageTemplate, evt)} [link]({BaseUrl}/#/events?filter=@Id%3D%3D'{evt.Id}'&show=expanded";
         }
 
-        string SubstitutePlaceholders(string messageTemplateToUse, Event<LogEventData> evt, bool addLogData = true)
+        string SubstitutePlaceholders(string messageTemplateToUse, Event<LogEventData> evt)
         {
             var data = evt.Data;
             var eventType = evt.EventType;
             var level = data.Level;
 
-            var placeholders = data.Properties?.ToDictionary(x => x.Key, x => x.Value, StringComparer.OrdinalIgnoreCase) 
+            var placeholders = data.Properties?.ToDictionary(x => x.Key, x => x.Value, StringComparer.OrdinalIgnoreCase)
                 ?? new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
 
-            if (addLogData)
-            {
-                AddValueIfKeyDoesntExist(placeholders, "Level", level);
-                AddValueIfKeyDoesntExist(placeholders, "EventType", eventType);
-                AddValueIfKeyDoesntExist(placeholders, "RenderedMessage", data.RenderedMessage);
-            }
+            AddValueIfKeyDoesntExist(placeholders, "Level", level);
+            AddValueIfKeyDoesntExist(placeholders, "EventType", eventType);
+            AddValueIfKeyDoesntExist(placeholders, "RenderedMessage", data.RenderedMessage);
+
             return PlaceholdersRegex.Replace(messageTemplateToUse, m =>
             {
                 var key = m.Groups["key"].Value.ToLower();
@@ -71,9 +69,8 @@ namespace Seq.App.Telegram
 
         static void AddValueIfKeyDoesntExist(IDictionary<string, object> placeholders, string key, object value)
         {
-            var loweredKey = key.ToLower();
-            if (!placeholders.ContainsKey(loweredKey))
-                placeholders.Add(loweredKey, value);
+            if (!placeholders.ContainsKey(key))
+                placeholders.Add(key, value);
         }
     }
 }
