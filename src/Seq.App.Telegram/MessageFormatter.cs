@@ -25,7 +25,7 @@ namespace Seq.App.Telegram
 
         public string GenerateMessageText(Event<LogEventData> evt)
         {
-            return $"{SubstitutePlaceholders(MessageTemplate, evt)} [link]({BaseUrl}/#/events?filter=@Id%3D%3D'{evt.Id}'&show=expanded";
+            return $"{SubstitutePlaceholders(MessageTemplate, evt)} [link]({BaseUrl}/#/events?filter=@Id%3D%3D'{evt.Id}'&show=expanded)";
         }
 
         string SubstitutePlaceholders(string messageTemplateToUse, Event<LogEventData> evt)
