@@ -1,7 +1,7 @@
 ﻿<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Seq.App.Telegram</id>
-    <version>0.0.1.8</version>
+    <version>0.0.1.9</version>
     <authors>STDray</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>An app for Seq (http://getseq.net) that forwards messages to Telegram.</description>
