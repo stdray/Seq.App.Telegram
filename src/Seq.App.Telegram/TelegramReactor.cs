@@ -20,7 +20,7 @@ namespace Seq.App.Telegram
         [SeqAppSetting(
             DisplayName = "Group chat identifier",
             HelpText = "Unique identifier for your group chat (include minus)")]
-        public int ChatId { get; set; }
+        public long ChatId { get; set; }
 
         [SeqAppSetting(
             DisplayName = "Seq Base URL",
