@@ -6,7 +6,7 @@
     <Description>An app for Seq (http://getseq.net) that forwards messages to Telegram.</Description>
     <Authors>STDray</Authors>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageIcon>icon.png</PackageIcon>
+    <PackageIconUrl>https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Telegram_alternative_logo.svg/200px-Telegram_alternative_logo.svg.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/stdray/Seq.App.Telegram</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>seq-app seq serilog events telegram</PackageTags>
@@ -19,7 +19,6 @@
   <ItemGroup>
     <PackageReference Include="Seq.Apps" Version="5.1.0" />
     <PackageReference Include="Telegram.Bot" Version="15.0.0" />
-    <None Include="icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net4.5.2' ">
