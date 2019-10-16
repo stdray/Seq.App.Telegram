@@ -13,5 +13,6 @@
   </metadata>
   <files>
     <file src="bin\$configuration$\*.dll" target="lib\net45" exclude="bin\$configuration$\Seq.Apps.*;bin\$configuration$\Serilog.*" />
+    <file src="bin\$configuration$\*.dll" target="lib\net452" exclude="bin\$configuration$\Seq.Apps.*;bin\$configuration$\Serilog.*" />
   </files>
 </package>
