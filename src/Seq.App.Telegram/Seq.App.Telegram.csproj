@@ -1,31 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net4.5.2</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Seq.App.Telegram</PackageId>
     <Description>An app for Seq (http://getseq.net) that forwards messages to Telegram.</Description>
     <Authors>STDray</Authors>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageIconUrl>https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Telegram_alternative_logo.svg/200px-Telegram_alternative_logo.svg.png</PackageIconUrl>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/stdray/Seq.App.Telegram</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>seq-app seq serilog events telegram</PackageTags>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <IncludeBuildOutput>true</IncludeBuildOutput>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net4.5.2' ">
-    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
-  </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Seq.Apps" Version="5.1.0" />
-    <PackageReference Include="Telegram.Bot" Version="15.0.0" />
+    <PackageReference Include="HttpToSocks5Proxy" Version="1.4.0"/>
+    <PackageReference Include="Seq.Apps" Version="5.1.0"/>
+    <PackageReference Include="Telegram.Bot" Version="15.0.0"/>
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net4.5.2' ">
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
+  <ItemGroup>
+    <None Include="icon.png" Pack="true" PackagePath="/" Visible="false" />
+    <None Include="./obj/publish/**/*.*" Exclude="./obj/publish/Seq.App.Telegram.dll;./obj/publish/Seq.Apps.dll;./obj/publish/Serilog.dll" Pack="true" PackagePath="lib/$(TargetFramework)" Visible="false" />
   </ItemGroup>
-
 
 </Project>
