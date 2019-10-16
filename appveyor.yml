@@ -1,6 +1,9 @@
 ﻿branches:
   only:
     - master
+nuget:
+
+  project_feed: true
 
 cache:
   - C:\ProgramData\chocolatey\bin -> appveyor.yml
@@ -16,8 +19,9 @@ assembly_info:
 before_build:
   - ps: gitversion /l console /output buildserver /updateAssemblyInfo
 
+version: '{GitVersion_NuGetVersion}'
+
 after_build:
 
   - cmd: dotnet pack src/Seq.App.Telegram/Seq.App.Telegram.csproj -p:PackageVersion="%GitVersion_NuGetVersion%" -c Release
-  - cmd: dotnet nuget push **/*.nupkg -k "%AppVeyorNuGet_Key%" -s "%AppVeyorNuGet_Feed%"
-
+  - appveyor PushArtifact **/*.nupkg
