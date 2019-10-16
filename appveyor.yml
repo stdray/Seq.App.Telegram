@@ -15,11 +15,13 @@ nuget:
 install:
   - choco install gitversion.portable -pre -y
 
-after_build:
-  - ps: gitversion /l console /output buildserver /updateAssemblyInfo
+before_build:
+  - cmd: gitversion /l console /output buildserver /updateAssemblyInfo
   - ps: Update-AppveyorBuild -Version $GitVersion_NuGetVersion
-  - ps: Push-Location src/Seq.App.Telegram
-  - ps: dotnet publish -c Release -o ./obj/publish
-  - ps: dotnet pack --no-build -c Release -o ./bin/nuget -p:PackageVersion=$GitVersion_NuGetVersion
+
+after_build:
+  - cmd: cd src/Seq.App.Telegram
+  - cmd: dotnet publish -c Release -o ./obj/publish
+  - cmd: dotnet pack --no-build -c Release -o ./bin/nuget -p:PackageVersion="%GitVersion_NuGetVersion%"
   - ps: Get-ChildItem -Recurse *.nupkg | % { Push-AppveyorArtifact $_ -FileName $_.Name }
  
