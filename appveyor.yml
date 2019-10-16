@@ -24,4 +24,5 @@ after_build:
   - cmd: dotnet publish -c Release -o ./obj/publish
   - cmd: dotnet pack --no-build -c Release -o ./bin/nuget -p:PackageVersion="%GitVersion_NuGetVersion%"
   - ps: Get-ChildItem -Recurse *.nupkg | % { Push-AppveyorArtifact $_ -FileName $_.Name }
+  - ps: Get-ChildItem -Recurse *.nupkg | % { dotnet nuget push -s "https://api.nuget.org/v3/index.json" -k $env:NuGet_Key $_.FullName }
  
