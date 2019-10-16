@@ -24,4 +24,4 @@ version: '{GitVersion_NuGetVersion}'
 after_build:
 
   - cmd: dotnet pack src/Seq.App.Telegram/Seq.App.Telegram.csproj -p:PackageVersion="%GitVersion_NuGetVersion%" -c Release
-  - appveyor PushArtifact **/*.nupkg
+  - ps: Get-ChildItem .\Args.*.nupkg | % { Push-AppveyorArtifact $_ -FileName $_.FullName }
