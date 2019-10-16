@@ -22,6 +22,7 @@ before_build:
 after_build:
   - ps: Push-Location src/Seq.App.Telegram
   - ps: dotnet publish -c Release -o ./obj/publish
+  - ps: echo $GitVersion_NuGetVersion
   - ps: dotnet pack --no-build -c Release -o ./bin/nuget -p:PackageVersion="$GitVersion_NuGetVersion"
   - ps: Get-ChildItem -Recurse *.nupkg | % { Push-AppveyorArtifact $_ -FileName $_.Name }
  
