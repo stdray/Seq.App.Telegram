@@ -1,0 +1,27 @@
+﻿version: '{build}'
+
+branches:
+  only:
+    - master
+
+cache:
+  - C:\ProgramData\chocolatey\bin -> appveyor.yml
+  - C:\ProgramData\chocolatey\lib -> appveyor.yml
+  - '%USERPROFILE%\.nuget\packages'
+
+nuget:
+  project_feed: true
+
+install:
+  - choco install gitversion.portable -pre -y
+
+before_build:
+  - cmd: gitversion /l console /output buildserver /updateAssemblyInfo
+  - ps: Update-AppveyorBuild -Version $GitVersion_NuGetVersion
+
+after_build:
+  - cmd: cd src/Seq.App.Telegram
+  - cmd: dotnet publish -c Release -o ./obj/publish
+  - cmd: dotnet pack --no-build -c Release -o ./bin/nuget -p:PackageVersion="%GitVersion_NuGetVersion%"
+  - ps: Get-ChildItem -Recurse *.nupkg | % { Push-AppveyorArtifact $_ -FileName $_.Name }
+ 
