@@ -48,7 +48,7 @@ namespace Seq.App.Telegram
         [SeqAppSetting(DisplayName = "Socks5 proxy username", IsOptional = true)]
         public string Socks5ProxyUserName { get; set; }
 
-        [SeqAppSetting(DisplayName = "Socks5 proxy password", IsOptional = true)]
+        [SeqAppSetting(DisplayName = "Socks5 proxy password", IsOptional = true, InputType = SettingInputType.Password)]
         public string Socks5ProxyPassword { get; set; }
 
         readonly Lazy<TelegramBotClient> _telegram;
