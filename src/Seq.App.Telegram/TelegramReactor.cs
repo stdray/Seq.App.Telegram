@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Seq.Apps;
@@ -10,7 +9,7 @@ using Telegram.Bot.Types.Enums;
 namespace Seq.App.Telegram
 {
     [SeqApp("Telegram notifier", Description = "Sends messages matching a view to Telegram.")]
-    public class TelegramReactor : Reactor, ISubscribeTo<LogEventData>
+    public class TelegramReactor : SeqApp, ISubscribeTo<LogEventData>
     {
         [SeqAppSetting(
             DisplayName = "Bot authentication token",
@@ -24,7 +23,7 @@ namespace Seq.App.Telegram
 
         [SeqAppSetting(
             DisplayName = "Seq Base URL",
-            HelpText = "Used for generating perma links to events in Telegram messages.",
+            HelpText = "Used for generating permalinks to events in Telegram messages.",
             IsOptional = true)]
         public string BaseUrl { get; set; }
 
@@ -53,6 +52,6 @@ namespace Seq.App.Telegram
             Task.Run(() => telegram.SendTextMessageAsync(ChatId, message, ParseMode.Markdown));
         }
 
-        string GetBaseUri() => BaseUrl ?? Host.ListenUris.FirstOrDefault();
+        string GetBaseUri() => BaseUrl ?? Host.BaseUri;
     }
 }
