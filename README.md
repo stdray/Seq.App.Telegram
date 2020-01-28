@@ -7,6 +7,7 @@ An app for Seq (http://getseq.net) that forwards messages to Telegram group chat
 
 
 ### In order to use Seq.App.Telegram you will need:
+* **Seq 5.1+** Older versions is not supported by current package.
 * **Bot authentication token**. You can use existing bot's token or create a new one. Refer to docs at https://core.telegram.org/bots/api#authorizing-your-bot.
 * **Chat id**. Invite [@ShowJsonBot](https://telegram.me/ShowJsonBot) or [@RawDataBot](https://telegram.me/RawDataBot) into your chat and it will send you a message. Copy `id` value from `chat` section including leading minus.
 	`chat` section example:
