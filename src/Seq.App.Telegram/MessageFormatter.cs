@@ -12,6 +12,14 @@ namespace Seq.App.Telegram
     {
         static readonly Regex PlaceholdersRegex = new Regex("(\\[(?<key>[^\\[\\]]+?)(\\:(?<format>[^\\[\\]]+?))?\\])", RegexOptions.CultureInvariant | RegexOptions.Compiled);
 
+        static readonly Dictionary<string, string> EscapeList = new Dictionary<string, string>
+        {
+            { "_", "\\_" },
+            { "*", "\\*" },
+            { "[", "\\[" },
+            { "`", "\\`" }
+        };
+
         public MessageFormatter(ILogger log, string baseUrl, string messageTemplate)
         {
             Log = log;
@@ -52,6 +60,11 @@ namespace Seq.App.Telegram
         string FormatValue(object value, string format)
         {
             var rawValue = value?.ToString() ?? "(Null)";
+
+            foreach (var escape in EscapeList)
+            {
+                rawValue = rawValue.Replace(escape.Key, escape.Value);
+            }
 
             if (string.IsNullOrWhiteSpace(format))
                 return rawValue;
