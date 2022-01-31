@@ -2,6 +2,7 @@
 using Seq.Apps;
 using Seq.Apps.LogEvents;
 using System;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot;
@@ -65,7 +66,7 @@ namespace Seq.App.Telegram
             var proxy = string.IsNullOrEmpty(Socks5ProxyUserName)
                 ? new HttpToSocks5Proxy(Socks5ProxyHost, Socks5ProxyPort)
                 : new HttpToSocks5Proxy(Socks5ProxyHost, Socks5ProxyPort, Socks5ProxyUserName, Socks5ProxyPassword);
-            return new TelegramBotClient(BotToken, proxy);
+            return new TelegramBotClient(BotToken, new HttpClient(new HttpClientHandler { Proxy = proxy }));
         }
 
         readonly Throttling<uint> _throttling = new Throttling<uint>();
