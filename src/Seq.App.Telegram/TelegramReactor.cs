@@ -31,6 +31,7 @@ namespace Seq.App.Telegram
 
         [SeqAppSetting(
             HelpText = "The message template to use when writing the message to Telegram. Refer to https://tlgrm.ru/docs/bots/api#formatting-options for Markdown style formatting options. Event property values can be added in the format [PropertyKey]. The default is \"[RenderedMessage]\"",
+            InputType = SettingInputType.LongText,
             IsOptional = true)]
         public string MessageTemplate { get; set; }
 
